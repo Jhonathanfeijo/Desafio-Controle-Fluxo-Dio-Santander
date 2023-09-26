@@ -10,14 +10,13 @@ public class ProcessoSeletivo {
     }
 
     static void imprimirCandidatosSelecionados(String[] candidatosSelecionados) {
-        if(candidatosSelecionados == null)
+        if (candidatosSelecionados == null) {
             System.out.println("\nNenhum candidato foi selecionado");
-        else{
+            return;
+        }
         System.out.println("\nOs candidatos foram selecionados!\nSegue lista:\n");
-        for (String candidato : candidatosSelecionados){
-            if(candidato != null)
-                System.out.println(candidato + " foi selecionado!");
-         }
+        for (String candidato : candidatosSelecionados) {
+            if (candidato != null) System.out.println(candidato + " foi selecionado!");
         }
     }
 
@@ -30,8 +29,7 @@ public class ProcessoSeletivo {
         int quantidadeCandidatosSelecionados = 0;
 
         for (String candidato : candidatos) {
-            if (quantidadeCandidatosSelecionados == 5)
-                break;
+            if (quantidadeCandidatosSelecionados == 5) break;
             double salarioPretendidoPorCandidato = valorPretendido();
             if (selecionarCandidato(candidato, salarioBase, salarioPretendidoPorCandidato)) {
                 candidatosSelecionados[quantidadeCandidatosSelecionados] = candidato;
@@ -50,28 +48,25 @@ public class ProcessoSeletivo {
         if (salarioBase < salarioPretendido) {
             System.out.println("-> Aguardando o resultado dos demais candidatos");
             return false;
-        } else if (salarioBase > salarioPretendido)
-            System.out.println("-> Ligar para candidato");
-        else if (salarioBase == salarioPretendido)
-            System.out.println("-> Ligar para candidato com contra proposta");
+        } else if (salarioBase > salarioPretendido) System.out.println("-> Ligar para candidato");
+        else if (salarioBase == salarioPretendido) System.out.println("-> Ligar para candidato com contra proposta");
         return true;
     }
 
     static void ligarParaCandidatosSelecionados(String[] candidatosSelecionados) {
         for (String candidato : candidatosSelecionados) {
-            if(candidato != null){
-            System.out.println();
-            boolean atendeu = false;
-            for (int i = 0; i < 3; i++) {
-                System.out.println("Ligando para " + candidato + "...");
-                atendeu = ThreadLocalRandom.current().nextBoolean();
-                System.out.println("Atendeu? " + (atendeu ? " Sim" : "Não"));
-                if (atendeu) {
-                    System.out.println(candidato + " atendeu na " + (i+1) + " tentativa");
-                    break;
-                }
-                if(i==2)
-                    System.out.println(candidato + " não atendeu nenhuma ligacao");
+            if (candidato != null) {
+                System.out.println();
+                boolean atendeu = false;
+                for (int i = 0; i < 3; i++) {
+                    System.out.println("Ligando para " + candidato + "...");
+                    atendeu = ThreadLocalRandom.current().nextBoolean();
+                    System.out.println("Atendeu? " + (atendeu ? " Sim" : "Não"));
+                    if (atendeu) {
+                        System.out.println(candidato + " atendeu na " + (i + 1) + " tentativa");
+                        break;
+                    }
+                    if (i == 2) System.out.println(candidato + " não atendeu nenhuma ligacao");
                 }
             }
         }
